@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import ServerContext from "../Context/ServerContext.js";
 
 export default function StudentPanel() {
@@ -14,17 +14,38 @@ export default function StudentPanel() {
 
   // Start Camera
   let vid = useState(null);
-  const startCamera = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-      videoRef.current.srcObject = stream;
-      vid = stream;
-      setCameraOn(true);
-    } catch (error) {
-      console.log("err: ",error);
-      alert("Camera Access Denied!");
+  // const startCamera = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+  //     videoRef.current.srcObject = stream;
+  //     vid = stream;
+  //     setCameraOn(true);
+  //   } catch (error) {
+  //     console.log("err: ",error);
+  //     alert("Camera Access Denied!");
+  //   }
+  // };
+
+const startCamera = ()=>
+{
+  setCameraOn(true);
+}
+
+useEffect(()=>
+  {
+    async function attachStream()
+    {
+      if(cameraOn && videoRef.current)
+      {
+        const stream = await navigator.mediaDevices.getUserMedia({video: true})
+        videoRef.current.srcObject = stream;
+        videoRef.current.play();
+      }
     }
-  };
+
+    attachStream();
+
+  }, [cameraOn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -137,7 +158,7 @@ export default function StudentPanel() {
           </div>
 
           {/* CAMERA BUTTON */}
-          <div className="d-flex justify-content-center mb-3">
+          {!cameraOn && (<div className="d-flex justify-content-center mb-3">
             <button
               type="button"
               onClick={startCamera}
@@ -146,7 +167,7 @@ export default function StudentPanel() {
             >
               📸 Start Video
             </button>
-          </div>
+          </div>)}
 
           {/* VIDEO PREVIEW */}
           {cameraOn && (
