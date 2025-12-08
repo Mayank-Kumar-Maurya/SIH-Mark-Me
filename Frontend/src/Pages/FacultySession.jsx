@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ServerContext from "../Context/ServerContext.js";
 
 export default function FacultySession() {
@@ -6,8 +6,21 @@ export default function FacultySession() {
   // const [branch, setBranch] = useState("");
   // const [subject, setSubject] = useState("");
   // const [isOnline, setIsOnline] = useState(false);
+  const [sessionOpen, setSessionOpen] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
   const {year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline} = useContext(ServerContext)
+
+useEffect(()=>
+  {
+    let timer; 
+    if(sessionOpen){
+      timer = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [sessionOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,13 +34,30 @@ export default function FacultySession() {
       return;
     }
 
-    alert(
-      `Session opened for:
-       Mode: ${isOnline ? "Online" : "Offline"}
-       Year: ${year}
-       Branch: ${branch}
-       Subject: ${subject}`
-    );
+    setSessionOpen(true);
+    setSeconds(0);
+
+    // alert(
+    //   `Session opened for:
+    //    Mode: ${isOnline ? "Online" : "Offline"}
+    //    Year: ${year}
+    //    Branch: ${branch}
+    //    Subject: ${subject}`
+    // );
+  };
+
+  const closeSession = (e)=>
+  {
+    e.preventDefault();
+    setSessionOpen((pre)=> pre = false);
+  };
+
+  const formateTime = (time)=>
+  {
+    const hr = String(Math.floor(time / 3600)).padStart(2, "0");
+    const min = String(Math.floor((time % 3600) / 60)).padStart(2, "0");
+    const sec = String(time % 60).padStart(2, "0");
+    return `${hr}:${min}:${sec}`;
   };
 
   return (
@@ -62,7 +92,7 @@ export default function FacultySession() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form >
           {/* YEAR */}
           <div className="mb-3">
             <label className="form-label fw-semibold">Select Year</label>
@@ -121,13 +151,29 @@ export default function FacultySession() {
             </div>
 
           {/* BUTTON */}
-          <button
+
+              {sessionOpen &&(
+                <div className="text-center mt-4">
+                  <h3>{formateTime(seconds)}</h3>
+                  <p className="text-muted">Session running...</p>
+                </div>
+              )}
+
+              <div className="d-flex justify-content-center mb-3">
+                {!sessionOpen ?(
+                  <button className="btn btn-primary" onClick={handleSubmit} >Open Session</button>
+                ) : (
+                  <button className="btn btn-danger" onClick={closeSession} >Close Session</button>
+                )}
+                </div>
+
+          {/* <button
             type="submit"
             className="btn btn-primary w-100 py-2 fw-semibold shadow-sm"
             style={{ borderRadius: "12px", fontSize: "1.1rem" }}
           >
             🚀 Open Session
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

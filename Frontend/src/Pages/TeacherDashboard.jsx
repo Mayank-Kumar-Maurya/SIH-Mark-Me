@@ -89,7 +89,7 @@ const TeacherDashboard = ({ user }) => {
           <thead className="table-dark">
             <tr>
               <th>Roll Number</th>
-              <th>Name</th>
+            
               <th>Subject</th>
               <th>Year</th>
               <th>Branch</th>
