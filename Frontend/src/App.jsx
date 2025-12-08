@@ -4,14 +4,16 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Component/Navbar'
+import Footer from './Component/Footer'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-       <Navbar/>
+        <Navbar/>
         <Outlet />
+        <Footer />
     </>
   )
 }
