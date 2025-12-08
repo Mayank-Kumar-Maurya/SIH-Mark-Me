@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef,useEffect } from "react";
 
 export default function StudentPanel() {
   const [year1, setYear1] = useState("");
@@ -10,15 +10,32 @@ export default function StudentPanel() {
   const videoRef = useRef(null);
 
   // Start Camera
-  const startCamera = async () => {
-    try {
+  // const startCamera = async () => {
+  //   try {
+  //     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  //     videoRef.current.srcObject = stream;
+  //     videoRef.current.play();
+  //     setCameraOn(true);
+  //   } catch (error) {
+  //     alert("Camera Access Denied!");
+  //     console.log(error);
+  //   }
+  // };
+
+  const startCamera = () => {
+    setCameraOn(true); 
+  };
+
+  useEffect(() => {
+  async function attachStream() {
+    if (cameraOn && videoRef.current) {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       videoRef.current.srcObject = stream;
-      setCameraOn(true);
-    } catch (error) {
-      alert("Camera Access Denied!");
+      videoRef.current.play();
     }
-  };
+  }
+    attachStream();
+  }, [cameraOn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +52,8 @@ export default function StudentPanel() {
        Roll No: ${roll}
        Subject: ${subject1}
        Camera: ${cameraOn ? "Started" : "Not Started"}`
-    );
+      );
+      // cameraOn(false);
   };
 
   return (
@@ -120,6 +138,7 @@ export default function StudentPanel() {
           </div>
 
           {/* CAMERA BUTTON */}
+          {!cameraOn && (
           <div className="d-flex justify-content-center mb-3">
             <button
               type="button"
@@ -130,6 +149,7 @@ export default function StudentPanel() {
               📸 Start Video
             </button>
           </div>
+          )}
 
           {/* VIDEO PREVIEW */}
           {cameraOn && (
@@ -138,6 +158,7 @@ export default function StudentPanel() {
                 ref={videoRef}
                 autoPlay
                 playsInline
+                muted
                 style={{
                   width: "100%",
                   borderRadius: "12px",
