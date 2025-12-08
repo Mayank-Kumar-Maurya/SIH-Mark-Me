@@ -228,6 +228,7 @@ export default function StudentPanel() {
     subject,
     setSendToBackend,
     sendFaceDescriptor,
+    setDescriptor
   } = useContext(ServerContext);
 
   const videoRef = useRef(null);
@@ -313,15 +314,19 @@ export default function StudentPanel() {
 
       const result = await detectFace(videoRef.current);
       console.log("video result: ", result);
+      
 
       if (!result || !result.descriptor) {
         alert("No face detected! Keep your face in front of camera.");
         setLoadingDescriptor(false);
+        
         return;
       }
 
       // OPTION 2 → send object { descriptor: [...] }
-      sendFaceDescriptor({ descriptor: result.descriptor });
+      // sendFaceDescriptor({ descriptor: result.descriptor });
+      setDescriptor(result.descriptor);
+      
       console.log(result.descriptor);
       console.log(result.descriptor.length);
 
@@ -466,6 +471,7 @@ export default function StudentPanel() {
           >
             {loadingDescriptor ? "🔍 Detecting Face..." : "✅ Submit Attendance"}
           </button>
+          <button className="btn btn-primary" onClick={sendFaceDescriptor}>sub</button>
         </form>
       </div>
     </div>

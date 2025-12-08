@@ -25,6 +25,7 @@ function ServerContextProvider({ children }) {
     const [sendToBackend, setSendToBackend] = useState();
     const [lat, setLat] = useState();
     const [log, setLog] = useState();
+    const [descriptor, setDescriptor] = useState(null);
 
     let handleVideo = async () => {
 
@@ -33,7 +34,7 @@ function ServerContextProvider({ children }) {
 
     let sendFaceDescriptor = async () => {
 
-
+        console.log("descriptor: ", descriptor);
         function getLocation() {
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(showPosition, ()=>{
@@ -55,8 +56,8 @@ function ServerContextProvider({ children }) {
 
         let serres = await server.post("/Face/sendFaceDescriptor",
             {
-                faceDescriptor: [0.25, 0.45, 0.11],
-                rollno: 23239
+                faceDescriptor: descriptor,
+                rollno: roll
             }
         );
 
@@ -71,7 +72,7 @@ function ServerContextProvider({ children }) {
     }
 
     return (
-        <ServerContext.Provider value={{ year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend}}>
+        <ServerContext.Provider value={{ year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor}}>
             {children}
         </ServerContext.Provider>
     )
