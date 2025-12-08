@@ -49,6 +49,9 @@ export default function Navbar() {
 
           {/* Right side buttons */}
           <div className="d-flex gap-2">
+            <Link to="/student-registration" className="btn btn-primary">
+              Register
+            </Link>
             <Link to="/faculty-session" className="btn btn-outline-primary">
               Faculty
             </Link>
