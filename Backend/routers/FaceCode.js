@@ -32,15 +32,26 @@ let eucliDistance = (a, b)=>
     // return false;
 }
 
+let distance = (lat1, log1, lat2, log2)=>
+{
+    let sq1 = Math.pow((lat1 - lat2), 2);
+    let sq2 = Math.pow((log1 - log2), 2);
+    let sqrt = Math.sqrt(sq1 + sq2);
+    return sqrt;
+}
+
 router.route("/sendFaceDescriptor")
 .post(async(req, res)=>
 {
     console.log(req.body);
-    let {faceDescriptor, rollno} = req.body;
+    let {faceDescriptor, rollno, lat, log} = req.body;
     console.log(faceDescriptor, rollno);
     // console.log("hi",JSON.parse(faceDescriptor))
 
     let code  = await Student.findOne({rollno: rollno});
+
+    
+    
 
     // console.log(code);
     // console.log(code.faceDescriptorCode[0]);
@@ -49,8 +60,10 @@ router.route("/sendFaceDescriptor")
         // eucliDis
         // let dist = eucliDistance(JSON.parse(code.faceDescriptorCode[0]), JSON.parse(faceDescriptor));
         let dist = eucliDistance(JSON.parse(code.faceDescriptorCode[0]), (faceDescriptor));
+        let nearBy =  distance(code.lat, code.log, lat, log);   
+        console.log("nearby", nearBy);
         console.log(dist);
-        if(dist <= 0.7)
+        if(dist <= 0.7 && nearBy <= 1.5)
         {
             console.log("okok")
             // return res.send("okok")

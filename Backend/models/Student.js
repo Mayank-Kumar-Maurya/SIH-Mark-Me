@@ -33,6 +33,12 @@ const StudentSchema = mongoose.Schema(
         faceDescriptorCode: {
             type: [String],
             // required: true,
+        },
+        lat: {
+            type: Number,
+        },
+        log: {
+            type: Number,
         }
     }
 );

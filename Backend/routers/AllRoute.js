@@ -5,7 +5,7 @@ const Student = require("../models/Student");
 router.route("/CreateStudent")
     .post(async (req, res) => {
         try {
-            let { year, branch, subject, rollno,faceDescriptorCode } = req.body;
+            let { year, branch, subject, rollno,faceDescriptorCode, lat, log } = req.body;
             console.log(req.body);
             let student = new Student(
                 {
@@ -14,6 +14,8 @@ router.route("/CreateStudent")
                     subject,
                     rollno,
                     faceDescriptorCode,
+                    lat,
+                    log
                 });
             let newStudent = await student.save();
 
