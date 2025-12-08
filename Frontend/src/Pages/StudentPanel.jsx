@@ -1,21 +1,27 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
+import ServerContext from "../Context/ServerContext.js";
 
 export default function StudentPanel() {
-  const [year1, setYear1] = useState("");
-  const [branch1, setBranch1] = useState("");
-  const [roll, setRoll] = useState("");
-  const [subject1, setSubject1] = useState("");
+  // const [year1, setYear1] = useState("");
+  // const [branch1, setBranch1] = useState("");
+  // const [roll, setRoll] = useState("");
+  // const [subject1, setSubject1] = useState("");
   const [cameraOn, setCameraOn] = useState(false);
+
+  const {year1, branch1, roll, subject1, setYear1, setBranch1, setRoll, setSubject1, year, branch, subject, isOnline, setSendToBackend, sendFaceDescriptor} = useContext(ServerContext);
 
   const videoRef = useRef(null);
 
   // Start Camera
+  let vid = useState(null);
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
       videoRef.current.srcObject = stream;
+      vid = stream;
       setCameraOn(true);
     } catch (error) {
+      console.log("err: ",error);
       alert("Camera Access Denied!");
     }
   };
@@ -28,14 +34,25 @@ export default function StudentPanel() {
       return;
     }
 
-    alert(
-      `Attendance Request Submitted:
-       Year: ${year1}
-       Branch: ${branch1}
-       Roll No: ${roll}
-       Subject: ${subject1}
-       Camera: ${cameraOn ? "Started" : "Not Started"}`
-    );
+    if(year1 == year && branch1 == branch && subject1 == subject)
+    {
+      setSendToBackend(true);
+      sendFaceDescriptor();
+      return;
+    }
+    else
+    {
+      alert("for this details no session is opend");
+    }
+
+    // alert(
+    //   `Attendance Request Submitted:
+    //    Year: ${year1}
+    //    Branch: ${branch1}
+    //    Roll No: ${roll}
+    //    Subject: ${subject1}
+    //    Camera: ${cameraOn ? "Started" : "Not Started"}`
+    // );
   };
 
   return (
@@ -136,14 +153,18 @@ export default function StudentPanel() {
             <div className="mb-3 text-center">
               <video
                 ref={videoRef}
+                // src={vid}
                 autoPlay
                 playsInline
+                muted
                 style={{
                   width: "100%",
                   borderRadius: "12px",
                   boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
                 }}
-              ></video>
+              >
+                 {/* <source  src={vid} type="video/mp4"></source> */}
+              </video>
             </div>
           )}
 

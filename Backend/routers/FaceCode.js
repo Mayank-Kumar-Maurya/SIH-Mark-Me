@@ -38,18 +38,25 @@ router.route("/sendFaceDescriptor")
     console.log(req.body);
     let {faceDescriptor, rollno} = req.body;
     console.log(faceDescriptor, rollno);
-    console.log("hi",JSON.parse(faceDescriptor))
+    // console.log("hi",JSON.parse(faceDescriptor))
+
     let code  = await Student.findOne({rollno: rollno});
-    console.log(code);
-    console.log(code.faceDescriptorCode[0]);
+
+    // console.log(code);
+    // console.log(code.faceDescriptorCode[0]);
     if(code)
     {
         // eucliDis
-        let dist = eucliDistance(JSON.parse(code.faceDescriptorCode[0]), JSON.parse(faceDescriptor));
+        // let dist = eucliDistance(JSON.parse(code.faceDescriptorCode[0]), JSON.parse(faceDescriptor));
+        let dist = eucliDistance(JSON.parse(code.faceDescriptorCode[0]), (faceDescriptor));
         console.log(dist);
         if(dist <= 0.7)
         {
-            // res.send("okok")
+            console.log("okok")
+            // return res.send("okok")
+            let id = code.id;
+            let update = await Student.findByIdAndUpdate(id, {attendance: code.attendance+1});
+            console.log("update: ",update);
             res.status(200).json({msg: "yess"});
         }
 
@@ -62,6 +69,10 @@ router.route("/sendFaceDescriptor")
             res.status(401).json({msg: "no"})
             // res.send("nono")
         }
+    }
+    else
+    {
+        res.status(401).json({msg: "no"});
     }
     // res.send("kk");
 });

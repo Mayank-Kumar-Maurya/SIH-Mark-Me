@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import ServerContext from "../Context/ServerContext.js";
 
 export default function FacultySession() {
-  const [year, setYear] = useState("");
-  const [branch, setBranch] = useState("");
-  const [subject, setSubject] = useState("");
-  const [isOnline, setIsOnline] = useState(false);
+  // const [year, setYear] = useState("");
+  // const [branch, setBranch] = useState("");
+  // const [subject, setSubject] = useState("");
+  // const [isOnline, setIsOnline] = useState(false);
+
+  const {year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline} = useContext(ServerContext)
 
   const handleSubmit = (e) => {
     e.preventDefault();
