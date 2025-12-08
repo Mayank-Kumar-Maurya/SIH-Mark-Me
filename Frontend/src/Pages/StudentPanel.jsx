@@ -234,7 +234,7 @@ export default function StudentPanel() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const detectionInterval = useRef(null);
-
+  
   const startCamera = () => setCameraOn(true);
 
   useEffect(() => {
@@ -341,7 +341,7 @@ export default function StudentPanel() {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center"
+      className="d-flex justify-content-center align-items-center py-4 mt-4"
       style={{ minHeight: "100vh", background: "rgba(240,240,240,0.9)" }}
     >
       <div
@@ -471,7 +471,7 @@ export default function StudentPanel() {
           >
             {loadingDescriptor ? "🔍 Detecting Face..." : "✅ Submit Attendance"}
           </button>
-          <button className="btn btn-primary" onClick={sendFaceDescriptor}>sub</button>
+          <button className="btn btn-primary m-1" onClick={sendFaceDescriptor}>submit</button>
         </form>
       </div>
     </div>

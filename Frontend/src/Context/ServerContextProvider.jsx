@@ -27,10 +27,39 @@ function ServerContextProvider({ children }) {
     const [log, setLog] = useState();
     const [descriptor, setDescriptor] = useState(null);
 
+    const [year2, setYear2] = useState("");
+    const [branch2, setBranch2] = useState("");
+    const [roll2, setRoll2] = useState("");
+    const [subject2, setSubject2] = useState("");
+
     let handleVideo = async () => {
 
     }
 
+    let createStudent = async()=>
+    {
+        let serres = await server.post("/CreateStudent",
+            {
+                year2,
+                branch2,
+                subject2,
+                rollno: roll2,
+                faceDescriptorCode: descriptor,
+                lat,
+                log
+            });
+
+            if(serres.status == 200)
+            {
+                alert("student registered");
+                return;
+            }
+            else
+            {
+                alert("not registered");
+                return
+            }
+    }
 
     let sendFaceDescriptor = async () => {
 
@@ -72,7 +101,7 @@ function ServerContextProvider({ children }) {
     }
 
     return (
-        <ServerContext.Provider value={{ year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor}}>
+        <ServerContext.Provider value={{ year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor, year2, setYear2, branch2, setBranch2, roll2, setRoll2, subject2, setBranch2, createStudent}}>
             {children}
         </ServerContext.Provider>
     )

@@ -10,6 +10,7 @@ import FacultySession from "./Pages/FacultySession.jsx";
 import StudentPanel from './Pages/StudentPanel.jsx'
 import TeacherDashboard from './Pages/TeacherDashboard.jsx'
 import AboutUs from './Pages/About.jsx'
+import StudentRegistration from './Pages/StudentRegistrationForm.jsx'
 
 
 let router = createBrowserRouter([
@@ -45,6 +46,10 @@ let router = createBrowserRouter([
         path: "/about",
         element: <AboutUs />,
       },
+      {
+        path: "/student-registration",
+        element: <StudentRegistration />
+      }
     ],
   },
 ]);

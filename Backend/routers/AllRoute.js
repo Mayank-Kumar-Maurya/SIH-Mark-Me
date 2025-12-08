@@ -5,14 +5,15 @@ const Student = require("../models/Student");
 router.route("/CreateStudent")
     .post(async (req, res) => {
         try {
-            let { year, branch, subject, rollno,faceDescriptorCode, lat, log } = req.body;
-            console.log(req.body);
+            let { year2, branch2, subject2, rollno,faceDescriptorCode, lat, log } = req.body;
+            console.log("hello", req.body);
+            console.log(year2)
             let student = new Student(
                 {
-                    year,
-                    branch,
-                    subject,
-                    rollno,
+                    year: year2,
+                    branch: branch2,
+                    // subject: sub,
+                    rollno: rollno,
                     faceDescriptorCode,
                     lat,
                     log
