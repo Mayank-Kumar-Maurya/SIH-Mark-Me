@@ -1,5 +1,6 @@
 // import React, { useState, useRef, useContext, useEffect } from "react";
 // import ServerContext from "../Context/ServerContext.js";
+// import { loadModels, detectFace, drawBoundingBox } from "../faceDetection";
 
 // export default function StudentPanel() {
 //   // const [year1, setYear1] = useState("");
@@ -202,8 +203,6 @@
 //     </div>
 //   );
 // }
-
-
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ServerContext from "../Context/ServerContext.js";
 
