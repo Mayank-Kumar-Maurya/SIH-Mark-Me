@@ -7,14 +7,14 @@ export default function Navbar() {
       <div className="container">
         {/* Logo + Name */}
         <Link className="navbar-brand d-flex align-items-center" to="/">
-          <img
-            src="/logo.png"
+          {/* <img
+            src="logo.png"
             alt="logo"
             width="40"
             height="40"
             className="me-2"
-          />
-          <h3 className="m-0 fw-bold text-primary">mark_me</h3>
+          /> */}
+          <h3 className="m-0 fw-bold text-primary">Mark_Me</h3>
         </Link>
 
         {/* Toggle button for mobile */}

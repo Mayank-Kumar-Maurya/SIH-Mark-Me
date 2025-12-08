@@ -7,6 +7,7 @@ import Student from './Component/Student.jsx'
 import ServerContextProvider from './Context/ServerContextProvider.jsx'
 import Home from './Component/Home.jsx'
 import FacultySession from "./Pages/FacultySession.jsx";
+import StudentPanel from './Pages/StudentPanel.jsx'
 
 
 let router = createBrowserRouter([
@@ -29,6 +30,10 @@ let router = createBrowserRouter([
       {
         path: "/faculty-session",
         element: <FacultySession />,
+      },
+      {
+        path: "/student-login",
+        element: <StudentPanel />,
       },
     ],
   },
