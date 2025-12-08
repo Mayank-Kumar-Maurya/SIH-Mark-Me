@@ -23,6 +23,8 @@ function ServerContextProvider({ children }) {
     const [roll, setRoll] = useState("");
     const [subject1, setSubject1] = useState("");
     const [sendToBackend, setSendToBackend] = useState();
+    const [lat, setLat] = useState();
+    const [log, setLog] = useState();
 
     let handleVideo = async () => {
 
@@ -30,6 +32,27 @@ function ServerContextProvider({ children }) {
 
 
     let sendFaceDescriptor = async () => {
+
+
+        function getLocation() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition, ()=>{
+                console.log("error at geoLocation");
+              });
+            } else {
+              console.log("geolocation is not working");
+            }
+          }
+      
+          function showPosition(position) {
+            let lati = position.coords.latitude;
+            let long = position.coords.longitude;
+            setLat(lati);
+            setLog(long); 
+          }
+
+          getLocation();
+
         let serres = await server.post("/Face/sendFaceDescriptor",
             {
                 faceDescriptor: [0.25, 0.45, 0.11],
