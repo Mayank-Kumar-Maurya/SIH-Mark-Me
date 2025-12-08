@@ -45,11 +45,6 @@ export default function Navbar() {
                 About
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link fw-semibold" to="/contact">
-                Contact Us
-              </Link>
-            </li>
           </ul>
 
           {/* Right side buttons */}

@@ -3,8 +3,8 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaHeart } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="mt-0 mb-0 p-0 bg-dark text-light">
-      <div className="container">
+    <footer className="mt-5 mb-0 p-0 bg-dark text-light">
+      <div className="container pt-5">
         <div className="row">
           {/* About Section */}
           <div className="col-md-4 mb-4">
@@ -63,7 +63,7 @@ export default function Footer() {
 
         {/* Bottom Footer */}
         <div className="d-flex justify-content-between align-items-center mt-3">
-          <p className="mb-0">© 2025 Attendify. All rights reserved.</p>
+          <p className="mb-0">© 2025 Mark_Me. All rights reserved.</p>
           <p className="mb-0">
             Crafted with <FaHeart className="text-danger" />
           </p>
