@@ -14,6 +14,14 @@ const StudentSchema = mongoose.Schema(
             type: Number,
             required: true,
         },
+        // whichType: {
+        //     subject:{
+        //         type: String,
+        //     },
+        //     attendance:{
+        //         type: String,
+        //     }
+        // },
         subject: {
             type: String,
             required: true,
