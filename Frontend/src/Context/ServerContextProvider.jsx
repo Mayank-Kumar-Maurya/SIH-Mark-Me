@@ -31,6 +31,7 @@ function ServerContextProvider({ children }) {
     const [branch2, setBranch2] = useState("");
     const [roll2, setRoll2] = useState("");
     const [subject2, setSubject2] = useState("");
+    const [token, setToken] = useState("");
 
     let handleVideo = async () => {
 
@@ -93,10 +94,12 @@ function ServerContextProvider({ children }) {
         if (serres.status == 200) {
             console.log("send code res: ", serres.data);
             alert("Attendence marked");
+            return;
         }
         else {
             console.log("false");
             alert("Attendence not marked");
+            return;
         }
     }
 
@@ -106,7 +109,7 @@ function ServerContextProvider({ children }) {
             rollno
         })
 
-        console.log(serres);
+        console.log(serres.data);
         if(serres.status == 200)
         {
             return serres.data;
@@ -117,8 +120,50 @@ function ServerContextProvider({ children }) {
         }
     }
 
+    let facultyRegis = async(facultyId, password)=>
+    {
+        let serres = await server.post("/FacultySignUp", 
+            {
+                facultyId,
+                password
+            }
+        );
+        console.log(serres.data);
+        if(serres.status == 201)
+        {
+            setToken(serres.data.token);
+
+            alert("Signup success")
+            return;
+        }
+        else
+        {
+            alert("Can't signup")
+        }
+    }
+    let facultyLogin = async(facultyId, password)=>
+    {
+        let serres = await server.post("/FacultyLogin", 
+            {
+                facultyId,
+                password
+            }
+        );
+        console.log(serres);
+        if(serres.status == 200)
+        {
+            setToken(serres.data.token);
+            alert("Login success")
+            return;
+        }
+        else
+        {
+            alert("Can't Login")
+        }
+    }
+
     return (
-        <ServerContext.Provider value={{ fetchData, year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor, year2, setYear2, branch2, setBranch2, roll2, setRoll2, subject2, setBranch2, createStudent}}>
+        <ServerContext.Provider value={{token, setToken, facultyLogin, facultyRegis, fetchData, year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor, year2, setYear2, branch2, setBranch2, roll2, setRoll2, subject2, setBranch2, createStudent}}>
             {children}
         </ServerContext.Provider>
     )

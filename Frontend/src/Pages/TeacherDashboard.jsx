@@ -2,6 +2,11 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ServerContext from "../Context/ServerContext.js";
 
+// / Chart imports
+import { Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+
+
 const TeacherDashboard = ({ user }) => {
   // Access control
 //   if (user.role !== "teacher") {
@@ -46,7 +51,28 @@ const TeacherDashboard = ({ user }) => {
       console.error(err);
       alert("No data found");
     }
-  };
+  };  
+
+  ChartJS.register(ArcElement, Tooltip, Legend);
+ // Prepare chart data
+  let pieData = null;
+
+  if (students) {
+    const attendance = students?.data?.attendance || 0;
+    const absent = 100 - attendance;
+
+    pieData = {
+      labels: ["Present %", "Absent %"],
+      datasets: [
+        {
+          data: [attendance, absent],
+          backgroundColor: ["#28a745", "#dc3545"], // green & red
+          hoverBackgroundColor: ["#218838", "#c82333"],
+        },
+      ],
+    };
+  }
+
 
   return (
     <div className="container mt-4">
@@ -126,7 +152,18 @@ const TeacherDashboard = ({ user }) => {
           </tbody>
         </table>
       </div>
+      {/* Pie Chart */}
+      {students && (
+        <div className="mt-5 text-center">
+          <h4>Attendance Overview</h4>
+          <div style={{ width: "350px", margin: "0 auto" }}>
+            <Pie data={pieData} />
+          </div>
+        </div>
+      )}
     </div>
+
+    
   );
 };
 

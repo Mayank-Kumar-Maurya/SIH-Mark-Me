@@ -52,13 +52,16 @@ export default function Navbar() {
             <Link to="/student-registration" className="btn btn-dark">
               Register
             </Link>
-            <Link to="/faculty-session" className="btn btn-outline-primary">
-              Faculty
-            </Link>
-
             <Link to="/student-login" className="btn btn-primary">
               Student
             </Link>
+            <Link to="/faculty-session" className="btn btn-outline-primary">
+              Faculty
+            </Link>
+            <Link to="/FacultyLogin" className="btn btn-success">
+              Faculty Login
+            </Link>
+            
           </div>
         </div>
       </div>
