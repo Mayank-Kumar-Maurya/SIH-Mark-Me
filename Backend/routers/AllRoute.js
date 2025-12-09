@@ -28,6 +28,20 @@ router.route("/CreateStudent")
         }
     });
 
+    router.route("/dashboard")
+    .post(async(req, res)=>
+    {
+        let {rollno} = req.body;
+        let resData = await Student.findOne({rollno});
+        if(resData)
+        {
+            res.status(200).json({data: resData});
+        }
+        else{
+            res.status(404).json({msg: "no data found"})
+        }  
+    })
+
 
 
 module.exports = router;

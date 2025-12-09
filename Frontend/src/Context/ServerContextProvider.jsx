@@ -100,8 +100,25 @@ function ServerContextProvider({ children }) {
         }
     }
 
+    let fetchData = async(rollno)=>
+    {
+        let serres = await server.post("/dashboard", {
+            rollno
+        })
+
+        console.log(serres);
+        if(serres.status == 200)
+        {
+            return serres.data;
+        }
+        else
+        {
+            alert("error occued");
+        }
+    }
+
     return (
-        <ServerContext.Provider value={{ year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor, year2, setYear2, branch2, setBranch2, roll2, setRoll2, subject2, setBranch2, createStudent}}>
+        <ServerContext.Provider value={{ fetchData, year, setYear, branch, setBranch, subject, setSubject, isOnline, setIsOnline, handleVideo, sendFaceDescriptor, year1, setSubject1,  setYear1, branch1, setBranch1, roll, setRoll, subject1, setSendToBackend, setDescriptor, year2, setYear2, branch2, setBranch2, roll2, setRoll2, subject2, setBranch2, createStudent}}>
             {children}
         </ServerContext.Provider>
     )
