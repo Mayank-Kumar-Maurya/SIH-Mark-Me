@@ -39,11 +39,11 @@ function Home() {
                 Next-gen Attendance
               </span>
 
-              <h1 className="fw-bold display-5">
+              <h1 className="fw-bold display-5 text-light">
                 Smart, secure, and effortless <br /> attendance
               </h1>
 
-              <p className="text-muted my-3">
+              <p className=" my-3 text-light">
                 Use camera-based face detection and one-click sessions to manage
                 classes with ease. Built for speed, privacy, and accuracy.
               </p>

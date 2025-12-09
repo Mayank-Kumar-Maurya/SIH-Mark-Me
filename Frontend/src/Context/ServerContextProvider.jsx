@@ -39,6 +39,27 @@ function ServerContextProvider({ children }) {
 
     let createStudent = async()=>
     {
+
+        console.log("descriptor: ", descriptor);
+        function getLocation() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition, ()=>{
+                console.log("error at geoLocation");
+              });
+            } else {
+              console.log("geolocation is not working");
+            }
+          }
+      
+          function showPosition(position) {
+            let lati = position.coords.latitude;
+            let long = position.coords.longitude;
+            setLat(lati);
+            setLog(long); 
+          }
+
+          getLocation();
+
         let serres = await server.post("/CreateStudent",
             {
                 year: year2,
@@ -84,22 +105,29 @@ function ServerContextProvider({ children }) {
 
           getLocation();
 
-        let serres = await server.post("/Face/sendFaceDescriptor",
-            {
-                faceDescriptor: descriptor,
-                rollno: roll
+        try {
+            let serres = await server.post("/Face/sendFaceDescriptor",
+                {
+                    faceDescriptor: descriptor,
+                    rollno: roll,
+                    lat,
+                    log
+                }
+            );
+    
+            if (serres.status == 200) {
+                console.log("send code res: ", serres.data);
+                alert("Attendence marked");
+                return;
             }
-        );
-
-        if (serres.status == 200) {
-            console.log("send code res: ", serres.data);
-            alert("Attendence marked");
-            return;
-        }
-        else {
-            console.log("false");
+            else {
+                console.log("false");
+                alert("Attendence not marked");
+                return;
+            }
+        } catch (error) {
             alert("Attendence not marked");
-            return;
+            return
         }
     }
 

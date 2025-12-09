@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import ServerContext from "../Context/ServerContext";
 
 export default function Navbar() {
+
+let {token} = useContext(ServerContext)
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
       <div className="container">
@@ -14,7 +18,7 @@ export default function Navbar() {
             height="40"
             className="me-2"
           /> */}
-          <h3 className="m-0 fw-bold text-primary">Mark_Me</h3>
+          <h3 className="m-0 fw-bold " style={{color: "pink"}}>MarkMe <span style={{color: "orange"}}>SEGA</span></h3>
         </Link>
 
         {/* Toggle button for mobile */}
@@ -49,18 +53,21 @@ export default function Navbar() {
 
           {/* Right side buttons */}
           <div className="d-flex gap-2">
+            {token ? 
             <Link to="/student-registration" className="btn btn-dark">
-              Register
-            </Link>
+            Register Student
+          </Link>: null}
             <Link to="/student-login" className="btn btn-primary">
               Student
             </Link>
+            { token ? 
             <Link to="/faculty-session" className="btn btn-outline-primary">
-              Faculty
-            </Link>
+            Faculty Session
+          </Link> : null}
+           { !token ?
             <Link to="/FacultyLogin" className="btn btn-success">
-              Faculty Login
-            </Link>
+            Faculty Login
+          </Link>: null}
             
           </div>
         </div>

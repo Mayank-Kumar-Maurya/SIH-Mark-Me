@@ -14,7 +14,7 @@ function FacultyLogin() {
             
             try {
                 let res = await facultyLogin(facultyId, password);
-                console(res);
+                console.log(res);
                 // if(res.status == 200)
                 // {
                 //     alert("Login Success");

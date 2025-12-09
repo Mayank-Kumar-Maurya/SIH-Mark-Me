@@ -8,13 +8,13 @@ const jwt = require('jsonwebtoken');
 router.route("/CreateStudent")
     .post(async (req, res) => {
         try {
-            let { year2, branch2, subject2, rollno,faceDescriptorCode, lat, log } = req.body;
+            let { year, branch, subject2, rollno,faceDescriptorCode, lat, log } = req.body;
             console.log("hello", req.body);
-            console.log(year2)
+            console.log(year)
             let student = new Student(
                 {
-                    year: year2,
-                    branch: branch2,
+                    year: year,
+                    branch: branch,
                     // subject: sub,
                     rollno: rollno,
                     faceDescriptorCode,
@@ -24,7 +24,7 @@ router.route("/CreateStudent")
             let newStudent = await student.save();
 
             console.log(newStudent);
-            res.send("success");
+            res.status(200).json({mess: "succe"});
         } catch (error) {
             console.log("err at studCreation", error);
             res.send(error);
@@ -88,7 +88,7 @@ router.route("/CreateStudent")
                     if(match)
                     {
                         console.log("yes match");
-                        res.status(200).json({message: "Login Successfully", token: await facultyCheck.generateToken(), facultyId: facultyCheck._id});
+                        res.status(200).json ({message: "Login Successfully", token: await facultyCheck.generateToken(), facultyId: facultyCheck._id});
                     }
                     else
                     {

@@ -66,8 +66,8 @@ const TeacherDashboard = ({ user }) => {
       datasets: [
         {
           data: [attendance, absent],
-          backgroundColor: ["#28a745", "#dc3545"], // green & red
-          hoverBackgroundColor: ["#218838", "#c82333"],
+          backgroundColor: ["#28a745", "gray"], // green & red
+          hoverBackgroundColor: ["#218838", "gray"],
         },
       ],
     };
@@ -76,11 +76,11 @@ const TeacherDashboard = ({ user }) => {
 
   return (
     <div className="container mt-4">
-      <h2>Teacher Dashboard - Attendance Report</h2>
+      <h2> Dashboard - Attendance Report</h2>
 
       {/* Filters */}
-      <div className="row my-3">
-        <div className="col-md-2">
+      <div className="row my-3 d-flex justify-content-center">
+        {/* <div className="col-md-2">
           <label>Year</label>
           <select className="form-select" value={year} onChange={e => setYear(e.target.value)}>
             <option value="1">1</option>
@@ -88,13 +88,13 @@ const TeacherDashboard = ({ user }) => {
             <option value="3">3</option>
             <option value="4">4</option>
           </select>
-        </div>
-        <div className="col-md-2">
+        </div> */}
+        {/* <div className="col-md-2">
           <label>Branch</label>
           <select className="form-select" value={branch} onChange={e => setBranch(e.target.value)}>
             <option value="CSE">CSE</option>
           </select>
-        </div>
+        </div> */}
         {/* <div className="col-md-2">
           <label>Subject</label>
           <select className="form-select" value={subject} onChange={e => setSubject(e.target.value)}>
@@ -108,7 +108,7 @@ const TeacherDashboard = ({ user }) => {
           <input type="number" className="form-control" value={threshold} onChange={e => setThreshold(e.target.value)} />
         </div> */}
         <div className="col-md-2">
-          <label>Roll Number (Optional)</label>
+          <label>Roll Number</label>
           <input type="text" className="form-control" value={rollNumber} onChange={e => setRollNumber(e.target.value)} />
         </div>
       </div>
@@ -116,7 +116,7 @@ const TeacherDashboard = ({ user }) => {
       {/* Buttons */}
       <div className="my-2">
         {/* <button className="btn btn-primary me-2" onClick={fetchByThreshold}>Show Students Below Threshold</button> */}
-        <button className="btn btn-secondary" onClick={fetchByRollNumber}>Check Specific Student</button>
+        <button className="btn btn-outline-success" onClick={fetchByRollNumber}>Check Attendence</button>
       </div>
 
       {/* Attendance Table */}
