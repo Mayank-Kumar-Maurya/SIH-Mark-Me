@@ -29,7 +29,7 @@ function Home() {
     <>
       <div
         className="container-fluid py-5"
-        style={{ backgroundColor: "#f5f8ff", minHeight: "100vh" }}
+        style={{ backgroundColor: "#43557dff", minHeight: "100vh" }}
       >
         <div className="container">
           <div className="row align-items-center">
@@ -63,7 +63,7 @@ function Home() {
                 }}
               >
                 <img
-                  src="https://skoolapp.com/wp-content/uploads/2018/03/website-attandence-features-page.png"
+                  src="https://kivtas.com/wp-content/uploads/2021/06/AI-face-biometric-attendance-system.png"
                   alt="Preview"
                   style={{
                     width: "100%",
