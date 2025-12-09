@@ -259,7 +259,7 @@ export default function StudentRegistration() {
             className="btn btn-primary w-100 py-2 fw-semibold shadow-sm"
             disabled={loadingDescriptor}
           >
-            {loadingDescriptor ? "🔍 Detecting Face..." : "✅ Submit Attendance"}
+            {loadingDescriptor ? "🔍 Detecting Face..." : "✅ Capture"}
           </button>
           <button className="btn btn-primary m-1" onClick={createStudent}>submit</button>
         </form>

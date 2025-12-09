@@ -470,7 +470,7 @@ export default function StudentPanel() {
             className="btn btn-primary w-100 py-2 fw-semibold shadow-sm"
             disabled={loadingDescriptor}
           >
-            {loadingDescriptor ? "🔍 Detecting Face..." : "✅ Submit Attendance"}
+            {loadingDescriptor ? "🔍 Detecting Face..." : "✅ Capture"}
           </button>
           <button className="btn btn-primary m-1" onClick={sendFaceDescriptor}>submit</button>
         </form>
