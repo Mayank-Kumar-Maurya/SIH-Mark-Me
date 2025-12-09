@@ -40,9 +40,9 @@ function ServerContextProvider({ children }) {
     {
         let serres = await server.post("/CreateStudent",
             {
-                year2,
-                branch2,
-                subject2,
+                year: year2,
+                branch: branch2,
+                // subject2,
                 rollno: roll2,
                 faceDescriptorCode: descriptor,
                 lat,

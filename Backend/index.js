@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express");
 const app = express();
 const port  = 8070;
@@ -9,8 +11,8 @@ const cors = require("cors");
 
 
 // connect to mongodb
-const MongoURL="mongodb://127.0.0.1:27017/SIH-Mark-Me";
-// const dburl=process.env.ATLAS_URL;
+// const MongoURL="mongodb://127.0.0.1:27017/SIH-Mark-Me";
+const dburl=process.env.ATLAS_URL;
 
 main().then(()=>
     {
@@ -23,7 +25,7 @@ main().then(()=>
 
 async function main()
 {
-    await mongoose.connect(MongoURL);
+    await mongoose.connect(dburl);
 }
 
 

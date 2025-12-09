@@ -289,15 +289,16 @@ export default function StudentPanel() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!year1 || !branch1 || !roll || !subject1) {
+    // if (!roll || !subject1) {
+    if (!roll ) {
       alert("Please fill all fields!");
       return;
     }
 
-    if (!(year1 === year && branch1 === branch && subject1 === subject)) {
-      alert("No active session for these details");
-      return;
-    }
+    // if (!(subject1 === subject)) {
+    //   alert("No active session for these details");
+    //   return;
+    // }
 
     if (!cameraOn) {
       alert("Start the video first!");
@@ -359,7 +360,7 @@ export default function StudentPanel() {
 
         <form onSubmit={handleSubmit}>
           {/* YEAR */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label fw-semibold">Select Year</label>
             <select
               className="form-select shadow-sm"
@@ -372,10 +373,10 @@ export default function StudentPanel() {
               <option>3rd Year</option>
               <option>4th Year</option>
             </select>
-          </div>
+          </div> */}
 
           {/* BRANCH */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="form-label fw-semibold">Select Branch</label>
             <select
               className="form-select shadow-sm"
@@ -389,7 +390,7 @@ export default function StudentPanel() {
               <option>ECE</option>
               <option>ME</option>
             </select>
-          </div>
+          </div> */}
 
           {/* ROLL */}
           <div className="mb-3">

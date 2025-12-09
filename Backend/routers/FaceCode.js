@@ -62,8 +62,9 @@ router.route("/sendFaceDescriptor")
         let dist = eucliDistance(JSON.parse(code.faceDescriptorCode[0]), (faceDescriptor));
         let nearBy =  distance(code.lat, code.log, lat, log);   
         console.log("nearby", nearBy);
-        console.log(dist);
-        if(dist <= 0.7 && nearBy <= 1.5)
+        console.log("dist",dist);
+        // if(dist <= 0.7 && nearBy <= 1.5)
+        if(dist <= 0.7 )
         {
             console.log("okok")
             // return res.send("okok")
